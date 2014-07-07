@@ -1,3 +1,3 @@
-FROM a9eb17255234
+FROM busybox
 ADD ./main /bin/main
 CMD ["/bin/main"]
