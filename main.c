@@ -6,11 +6,22 @@ int main(int argc, char *argv[])
         pid_t pid = fork();
         if (pid == 0) {
                 setsid();
-                sleep(1000);
+                pid_t pid = fork();
+                if (pid == 0) {
+                        setsid();
+                        sleep(1000);
+                        return 0;
+                }
+
+                if (pid > 0) {
+                        sleep(10);
+                        return 0;
+                }
+                printf("error double fork %d\n", pid);
                 return 0;
         }
         if (pid > 0) {
-                sleep(10);
+                sleep(20);
                 return 0;
         }
         printf("error fork %d\n", pid);
